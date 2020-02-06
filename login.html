@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="679551707407-a8fcfgmlkaobbsbm8t26i6pnjbo4sc9t.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer>
+        function init() {
+            gapi.load('auth2', function () {
+            });
+        }</script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="g-signin2" data-onsuccess="onSignIn">sign in</div>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            var id_token = googleUser.getAuthResponse().id_token;
+            var email = profile.getEmail();
+            var name = profile.getName();
+            var gid = profile.getId();
+            console.log('Token: ' + id_token);
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:3000/user/createNewUser');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {console.log('Signed in as: ' + xhr.responseText);};
+            xhr.send("id_token="+id_token+"&google_name="+name+"&google_id="+gid+"&google_email="+email);
+                
+        }
+    </script>
+</body>
+
+</html>
