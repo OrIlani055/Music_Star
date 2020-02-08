@@ -8,6 +8,9 @@ const { Schema, model } = require('mongoose');
 const googleSchema = new Schema({
     access_token: { type: String, required: true, unique: true },
     refresh_token: { type: String, required: true },
+    scope:{ type: String, required: true },
+    token_type: { type: String, required: true },
+    expiry_date: {type: Number, required: true}
 
 }, { collection: "googles" });
 
@@ -28,6 +31,9 @@ googleSchema.statics.createNewClientUser = async function (body) {
     let userObj = new this({
         access_token: body.access_token,
         refresh_token: body.refresh_token,
+        scope: body.scope,
+        token_type: body.token_type,
+        expiry_date: body.expiry_date,
     });
     return await userObj.save();
 }

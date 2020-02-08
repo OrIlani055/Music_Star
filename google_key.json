@@ -1,17 +1,7 @@
-
- {
-    "client": {
-        "id": "679551707407-a8fcfgmlkaobbsbm8t26i6pnjbo4sc9t.apps.googleusercontent.com",
-        "secret": "llRs7bXTiwx0kksZlguHr0GY",
-        "redirect": "http://localhost:3000/google/gCallback"
-    },
-
-
-
-    "credentials": {
-        "access_token": "your access_token",
-        "token_type": "Bearer",
-        "expires_in": 3600,
-        "refresh_token": "your refresh_token"
-    }
+{"client":
+    {"id":"679551707407-a8fcfgmlkaobbsbm8t26i6pnjbo4sc9t.apps.googleusercontent.com",
+        "project_id":"cloudproj-266211",
+        "secret":"llRs7bXTiwx0kksZlguHr0GY",
+        "redirect":["http://localhost:3000/google/gCallback"]
+        }
 }

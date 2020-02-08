@@ -15,7 +15,7 @@ async function startauth(req, res) {
         // Generate an OAuth URL and redirect there
         const url = oAuth2Client.generateAuthUrl({
             access_type: 'offline',
-            scope:['https://www.googleapis.com/auth/calendar.readonly','https://www.googleapis.com/oauth2/v2/userinfo']
+            scope:['https://www.googleapis.com/auth/calendar.readonly']
         });
         console.log(url)
         res.redirect(url);
@@ -33,6 +33,7 @@ async function googleCallBack(req, res){
             } else {
                 console.log('Successfully authenticated');
                 oAuth2Client.setCredentials(tokens);
+                console.log(oAuth2Client);
                 createGoogleUser(tokens);
                 res.redirect('/');
             }
@@ -52,20 +53,18 @@ async function createGoogleUser(body) {
     }
 }
 
-async function profileview (req,res){
-        try {
-            let data = await model.find({ _id: '5e3598e942ed8a4c05aed923'},
+async function profileview (data){
+         try {
+           let user = await model.find({ _id:("5e3ea1de3a65692a1929edab")}, { '_id': false, '__v': false},
                 err => {
                     if (err) throw err;
                 }
             );
-            console.log(data);
-            //console.log(data.access_token);
-            //console.log(data.refresh_token);
-
-            const access = "ya29.Il-8B_0A99qBpanva-bvh1vKZvxhv8bT8D19ln2X25T3zbpUy1bgUtryWnC8X8s3_92dempOSjq23lyLMl6RjvATiP1KK5_0OEkP-x1pmWY7A3-60q_CAQznBYB0_dFnbQ"
-            const refresh = "1//03ERTBW6GfC9OCgYIARAAGAMSNwF-L9IriLaliTnEjeZXJ559eSqmomS-nvo9FUEN1RUpCQvFzESC0RVveGfVStbjk_lK9iiatVY";
-  const calendar = google.calendar({version: 'v3', access});
+           //console.log(user);
+            oAuth2Client.setCredentials({refresh_token: user[0].refresh_token});
+            //console.log(oAuth2Client);
+            
+  const calendar = google.calendar({version: 'v3', auth: oAuth2Client});
   calendar.events.list({
     calendarId: 'primary',
     timeMin: (new Date()).toISOString(),
@@ -97,3 +96,5 @@ module.exports = {
     createGoogleUser,
     profileview
 };
+
+
