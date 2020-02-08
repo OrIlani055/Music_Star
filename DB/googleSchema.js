@@ -24,8 +24,6 @@ googleSchema.statics.findUser = function (access_token) {
     });
 }
 
-
-
 // create client user by sending id_token , authorization set to client by default
 googleSchema.statics.createNewClientUser = async function (body) {
     let userObj = new this({

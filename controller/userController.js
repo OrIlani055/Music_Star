@@ -3,7 +3,7 @@ const model = require('../DB/userSchema');
 // check if user exists in our system by google id_token, if yes send in the data the authorization of the user
 async function checkUser(req, res) {
     try {
-        const data = await model.findUser(req.body.id_token);
+        const data = await model.findUser(req.body.google_id);
         if (data.length == 0) {
             res.status(200).json({
                 status: 200,
@@ -33,21 +33,10 @@ async function checkUser(req, res) {
 async function createClientUser(req, res) {
     try {
         //console.log(req.body);
-        const data = await model.createNewClientUser(req.body);
-        res.status(200).json({
-            status:200,
-            message: "success",
-            action: "Create",
-            data: data
-        })
-
+        const data = await model.createNewClientUser(req);
     } catch (err) {
-        res.status(500).json({
-            status:500,
-            message: err.message,
-            action: "Create",
-            data: null
-        })
+        console.log(err);
+        
     }
 }
 
