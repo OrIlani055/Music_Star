@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000;
 
 const userApi = require('./routes/userRoute');
 const googleApi = require('./routes/googleRoute');
+const youtubeApi = require('./routes/youtubeRoute');
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -24,6 +25,7 @@ app.use(
 
 app.use('/user', userApi);
 app.use('/google', googleApi);
+app.use('/youtube', youtubeApi);
 
 app.listen(port, () => {
   console.log("running on port: " + port);

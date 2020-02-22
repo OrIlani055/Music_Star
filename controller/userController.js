@@ -1,4 +1,4 @@
-const model = require('../DB/userSchema');
+const model = require('../DB/googleSchema');
 
 // check if user exists in our system by google id_token, if yes send in the data the authorization of the user
 async function checkUser(req, res) {
@@ -33,14 +33,15 @@ async function checkUser(req, res) {
 async function createClientUser(req, res) {
     try {
         //console.log(req.body);
-        const data = await model.createNewClientUser(req);
+        const data = await model.CreateGoogleUserDetails(req);
     } catch (err) {
         console.log(err);
         
     }
 }
 
+
 module.exports = {
     checkUser,
-    createClientUser
+    createClientUser,
 };

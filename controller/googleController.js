@@ -18,7 +18,7 @@ async function startauth(req, res) {
             access_type: 'offline',
             scope:['https://www.googleapis.com/auth/calendar.readonly','https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email']
         });
-        console.log(url)
+        //console.log(url)
         res.redirect(url);
     }
 }
@@ -34,21 +34,20 @@ async function googleCallBack(req, res){
             } else {
                 console.log('Successfully authenticated');
                 oAuth2Client.setCredentials(tokens);
-                //console.log(oAuth2Client);
-                createGoogleUser(tokens);
-                userInfo(tokens)
+                console.log(oAuth2Client);
+                //createGoogleUser(tokens);
+                //userInfo(tokens);
                 res.redirect('/');
             }
         });
     }
 }
 
-
-
 async function createGoogleUser(body) {
     try {
         //console.log(body);
-        const data = await model.createNewClientUser(body);
+        const data = await model.createGoogleUser(body);
+        userInfo(body)
 
     } catch (err) {
         console.log(err);
@@ -57,15 +56,9 @@ async function createGoogleUser(body) {
 
 async function profileview (data){
          try {
-           let user = await model.find({ _id:("5e3eaf79db8c6030232c930a")}, { '_id': false, '__v': false},
-                err => {
-                    if (err) throw err;
-                }
-            );
-            //userInfo(data);
-           //console.log(user);
-            oAuth2Client.setCredentials({refresh_token: user[0].refresh_token});
-            //console.log(oAuth2Client);
+        let user = await model.findUserByEmail('orilani055@gmail.com');
+        oAuth2Client.setCredentials({access_token: user[0].google.access_token});
+        //console.log(oAuth2Client);
             
   const calendar = google.calendar({version: 'v3', auth: oAuth2Client});
   calendar.events.list({
@@ -91,13 +84,14 @@ async function profileview (data){
             console.log(err);
         }
 }
+
 async function userInfo(data){
-    // let user = await model.find({ _id:("5e3eaf79db8c6030232c930a")}, { '_id': false, '__v': false},
-    // err => {
-    //     if (err) throw err;
-    //  }
-    // );
-    console.log(data);
+   let user = await model.find({ "google.refresh_token":data.refresh_token},
+    err => {
+        if (err) throw err;
+     }
+    );
+    let objID = console.log(user[0]);
     var OAuth2 = google.auth.OAuth2;
     var oauth2Client = new OAuth2();
     oauth2Client.setCredentials({access_token: data.access_token});
@@ -110,9 +104,16 @@ async function userInfo(data){
         if (err) {
            console.log(err);
         } else {
-            userController.createClientUser(res);
-           //console.log(res);
-
+                let update = {
+                    google_id: res.data.id,
+                    email: res.data.email,
+                    name: res.data.name
+                };
+                console.log(update);
+                
+                model.updateOne(objID, update,
+                err => { if (err) throw err;}
+                );
         }
     });}
 

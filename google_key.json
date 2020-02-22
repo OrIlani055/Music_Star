@@ -1,7 +1,0 @@
-{"client":
-    {"id":"679551707407-a8fcfgmlkaobbsbm8t26i6pnjbo4sc9t.apps.googleusercontent.com",
-        "project_id":"cloudproj-266211",
-        "secret":"llRs7bXTiwx0kksZlguHr0GY",
-        "redirect":["http://localhost:3000/google/gCallback"]
-        }
-}
