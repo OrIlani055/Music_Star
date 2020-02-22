@@ -10,9 +10,6 @@ router.get('/gCallback', (req, res) => {
     googleController.googleCallBack(req, res);
 });
 
-// router.post('/GtoDB', (req, res) => {
-//     googleController.createGoogleUser(req, res);
-// });
 
 router.get('/calander', (req, res) => {
     googleController.profileview();
