@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { google } = require('googleapis');
+const youtubeController = require('../controller/youtubeController');
 
 var youtube = google.youtube({
     version: 'v3',
@@ -7,19 +8,10 @@ var youtube = google.youtube({
 });
 
 router.get('/search/:q', (req, res) => {
-    youtube.search.list({
-        part: 'snippet',
-        order: 'viewCount',
-        type: 'playlist',
-        q: req.params.q
-    }, function (err, data) {
-        if (err) {
-            console.error('Error: ' + err);
-        }
-        if (data) {
-            res.status(200).json(data.data.items);
-        }
-    });
+   youtubeController.searchPlaylist(req.params.q,res);
 });
 
+
+
 module.exports = router;
+

@@ -3,7 +3,7 @@ const app = express()
 const port = process.env.PORT || 5000;
 
 
-const userApi = require('./routes/userRoute');
+//const userApi = require('./routes/userRoute');
 const googleApi = require('./routes/googleRoute');
 const youtubeApi = require('./routes/youtubeRoute');
 
@@ -23,8 +23,8 @@ app.use(
 
 // routes for all api services
 
-app.use('/user', userApi);
-app.use('/google', googleApi);
+//app.use('/user', userApi);
+app.use('/login', googleApi);
 app.use('/youtube', youtubeApi);
 
 app.listen(port, () => {
