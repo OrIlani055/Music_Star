@@ -1,5 +1,4 @@
 const { google } = require('googleapis');
-const OAuth2Data = require('../google_key.json');
 const model = require('../DB/googleSchema');
 const userController = require('./userController');
 
