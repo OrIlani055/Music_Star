@@ -4,9 +4,10 @@ const model = require('../DB/googleSchema');
 const userController = require('./userController');
 
 
-const CLIENT_ID = OAuth2Data.client.id;
-const CLIENT_SECRET = OAuth2Data.client.secret;
-const REDIRECT_URL = OAuth2Data.client.redirect
+const CLIENT_ID = process.env.google_client_id;
+const CLIENT_SECRET = process.env.google_client_secret;
+const REDIRECT_URL = process.env.google_client_redirect;
+
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
 var authed = false;
@@ -35,8 +36,7 @@ async function googleCallBack(req, res){
                 console.log('Successfully authenticated');
                 oAuth2Client.setCredentials(tokens);
                 console.log(oAuth2Client);
-                //createGoogleUser(tokens);
-                //userInfo(tokens);
+                createGoogleUser(tokens);
                 res.redirect('/');
             }
         });
@@ -46,43 +46,12 @@ async function googleCallBack(req, res){
 async function createGoogleUser(body) {
     try {
         //console.log(body);
-        const data = await model.createGoogleUser(body);
+        await model.createGoogleUser(body);
         userInfo(body)
 
     } catch (err) {
         console.log(err);
     }
-}
-
-async function profileview (data){
-         try {
-        let user = await model.findUserByEmail('orilani055@gmail.com');
-        oAuth2Client.setCredentials({access_token: user[0].google.access_token});
-        //console.log(oAuth2Client);
-            
-  const calendar = google.calendar({version: 'v3', auth: oAuth2Client});
-  calendar.events.list({
-    calendarId: 'primary',
-    timeMin: (new Date()).toISOString(),
-    maxResults: 10,
-    singleEvents: true,
-    orderBy: 'startTime',
-  }, (err, res) => {
-    if (err) return console.log('The API returned an error: ' + err);
-    const events = res.data.items;
-    if (events.length) {
-      console.log('Upcoming 10 events:');
-      events.map((event, i) => {
-        const start = event.start.dateTime || event.start.date;
-        console.log(`${start} - ${event.summary}`);
-      });
-    } else {
-      console.log('No upcoming events found.');
-    }
-  });
-        }catch (err) {
-            console.log(err);
-        }
 }
 
 async function userInfo(data){
@@ -115,14 +84,45 @@ async function userInfo(data){
                 err => { if (err) throw err;}
                 );
         }
-    });}
+    });
+}
+
+async function profileview (data){
+        try {
+               let user = await model.findUserByEmail('orilani055@gmail.com');
+               oAuth2Client.setCredentials({access_token: user[0].google.access_token});
+           
+               const calendar = google.calendar({version: 'v3', auth: oAuth2Client});
+               calendar.events.list({
+               calendarId: 'primary',
+               timeMin: (new Date()).toISOString(),
+               maxResults: 10,
+               singleEvents: true,
+               orderBy: 'startTime',
+           }, (err, res) => {
+               if (err) return console.log('The API returned an error: ' + err);
+               const events = res.data.items;
+               if (events.length) {
+               console.log('Upcoming 10 events:');
+               events.map((event, i) => {
+                       const start = event.start.dateTime || event.start.date;
+                       console.log(`${start} - ${event.summary}`);
+                    });
+               } else {
+               console.log('No upcoming events found.');
+               }
+           });
+       }catch (err) {
+           console.log(err);
+       }
+}
+
 
 module.exports = {
     startauth,
     googleCallBack,
     createGoogleUser,
     profileview,
-    userInfo
 };
 
 
