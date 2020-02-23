@@ -1,12 +1,16 @@
 const { google } = require('googleapis');
 const { PlaylistModel,SongModel } = require('../DB/youtubeSchema');
+const Googlemodel = require('../DB/googleSchema');
 const ErrHandler = require('../helpers/errHandler');
 
 
-const youtube = google.youtube({
+
+var youtube = google.youtube({
     version: 'v3',
     auth: process.env.google_api_key
 });
+
+
 
 class YoutubePlaylist{
 
@@ -20,8 +24,7 @@ class YoutubePlaylist{
                     console.error('Error: ' + err);
                 }
                 if (data) {
-                    res.status(200).json(data.data.items);
-                    
+                    res.status(200).json(data.data.items); 
                 }
             });
         }
@@ -59,9 +62,10 @@ class YoutubePlaylist{
     }
 
     static async create(req, res) {
+        console.log(req.params.id);
         try {
             let playlist = PlaylistModel({
-                id: req.body.id,
+                id: req.params.id,
                 name: req.body.playlistName
             });
 
@@ -165,3 +169,37 @@ class YoutubePlaylist{
 }
 
 module.exports = YoutubePlaylist;
+
+
+
+
+
+// const CLIENT_ID = process.env.google_client_id;
+// const CLIENT_SECRET = process.env.google_client_secret;
+// const REDIRECT_URL = process.env.google_client_redirect;
+// const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
+
+
+// async function ssearchPlaylist(req,res){
+//     let user =  await Googlemodel.findUserByEmail('orilani055@gmail.com');
+//     console.log(user[0].google);
+//     oAuth2Client.setCredentials({refresh_token: user[0].google.refresh_token});
+//     console.log(oAuth2Client);
+//     const youtube = google.youtube({
+//         version: 'v3',
+//         auth: oAuth2Client
+//     });
+//     youtube.search.list({
+//         part: 'snippet',
+//         order: 'viewCount',
+//         q: req.params.q
+//         }, function (err, data) {
+//             if (err) {
+//                 console.error('Error: ' + err);
+//             }
+//             if (data) {
+//                 res.status(200).json(data.data.items);
+                
+//             }
+//         });
+// };

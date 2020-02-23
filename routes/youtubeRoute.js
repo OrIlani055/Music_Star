@@ -5,7 +5,6 @@ router.get('/search/:q', (req, res) => {
    youtubeController.searchPlaylist(req,res);
 });
 
-
 router.post('/:playlist/insert',(req, res) => {
     youtubeController.insertToplaylist(req,res);
 });

@@ -3,22 +3,22 @@ const { Schema, model } = require('mongoose');
 const song = new Schema({
         name: {
             type: String,
-            //required: true
+            required: true
         },
         vid: {
             type: String,
-            //required: true
+            required: true
         }
 },{ collection: "songs" });;
 
 const playlist = new Schema({
         id : {
             type: Number,
-            //required: true
+            required: true
         },
         name: {
             type: String,
-            //required: true
+            required: true
         },
         songs: [song]
     }, {

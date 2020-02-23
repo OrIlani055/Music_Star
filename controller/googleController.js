@@ -16,7 +16,7 @@ async function startauth(req, res) {
         // Generate an OAuth URL and redirect there
         const url = oAuth2Client.generateAuthUrl({
             access_type: 'offline',
-            scope:['https://www.googleapis.com/auth/calendar.readonly','https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email']
+            scope:['https://www.googleapis.com/auth/calendar.readonly','https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/youtube']
         });
         //console.log(url)
         res.redirect(url);
@@ -89,8 +89,7 @@ async function userInfo(data){
 async function profileview (data){
         try {
                let user = await model.findUserByEmail('orilani055@gmail.com');
-               oAuth2Client.setCredentials({access_token: user[0].google.access_token});
-           
+               oAuth2Client.setCredentials({refresh_token: user[0].google.refresh_token});
                const calendar = google.calendar({version: 'v3', auth: oAuth2Client});
                calendar.events.list({
                calendarId: 'primary',
