@@ -18,6 +18,7 @@ class YoutubePlaylist{
         youtube.search.list({
             part: 'snippet',
             order: 'viewCount',
+            type: 'playlist',
             q: req.params.q
             }, function (err, data) {
                 if (err) {
