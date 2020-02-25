@@ -7,7 +7,7 @@ async function checkUser(req, res) {
         if (data.length == 0) {
             res.status(200).json({
                 status: 200,
-                message: "No user was found for this id_token",
+                message: "No user was found for this google id",
                 action: "Read",
                 data: null
             });
@@ -27,13 +27,12 @@ async function checkUser(req, res) {
             data: null
         })
     }
-
 }
 
-async function createClientUser(req, res) {
+async function createUserInfo(req, res) {
     try {
-        //console.log(req.body);
-        const data = await model.CreateGoogleUserDetails(req);
+        console.log(req.body);
+        const data = await model.CreateUserDetails(req.body);
     } catch (err) {
         console.log(err);
         
@@ -43,5 +42,5 @@ async function createClientUser(req, res) {
 
 module.exports = {
     checkUser,
-    createClientUser,
+    createUserInfo,
 };

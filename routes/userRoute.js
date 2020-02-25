@@ -6,8 +6,8 @@ router.post('/checkUser', (req, res) => {
     userController.checkUser(req, res);
 });
 
-router.post('/createNewUser', (req, res) => {
-    userController.createClientUser(req, res);
+router.post('/createUserInfo', (req, res) => {
+    userController.createUserInfo(req, res);
 });
 
 // default route

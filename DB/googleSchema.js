@@ -16,7 +16,6 @@ const userSchema = new Schema({
 }, { collection: "users" });
 
 
-// create client user by sending id_token , authorization set to client by default
 userSchema.statics.CreateGoogleUserDetails = async function (body) {
     console.log(body.data);
     let userObj = new this({
@@ -38,6 +37,15 @@ userSchema.statics.createGoogleUser = async function (body) {
             expiry_date: body.expiry_date,
         }
     });
+    return await userObj.save();
+}
+
+userSchema.statics.CreateUserDetails = async function (body) {
+    let userObj = new this({
+            jobtitle: body.jobtitle,
+            music_pref: body.music_pref
+    });
+    //console.log(body);
     return await userObj.save();
 }
 

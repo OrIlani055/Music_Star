@@ -1,6 +1,5 @@
 const { google } = require('googleapis');
 const model = require('../DB/googleSchema');
-const userController = require('./userController');
 
 
 const CLIENT_ID = process.env.google_client_id;
@@ -19,7 +18,7 @@ async function startauth(req, res) {
             scope:['https://www.googleapis.com/auth/calendar.readonly','https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/youtube']
         });
         //console.log(url)
-        res.redirect(url);
+        res.json(url);
     }
 }
 
@@ -36,7 +35,7 @@ async function googleCallBack(req, res){
                 oAuth2Client.setCredentials(tokens);
                 console.log(oAuth2Client);
                 createGoogleUser(tokens);
-                res.redirect('/');
+                res.redirect('http://localhost:3001/');
             }
         });
     }
