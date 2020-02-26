@@ -37,9 +37,7 @@ async function createUserInfo(req, res) {
         let objID = console.log(user[0]);
         console.log(req.body);
         let update = {
-            google_id: res.data.id,
-            email: res.data.email,
-            name: res.data.name
+            music_pref: body.music_pref
         };
         console.log(update);
         model.updateOne(objID, update,
