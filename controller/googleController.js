@@ -38,7 +38,7 @@ async function googleCallBack(req, res){
                 //console.log(oAuth2Client);
                 myauth = oAuth2Client.credentials;
                 createGoogleUser();
-                res.redirect('http://localhost:3000/#');
+                res.redirect('http://localhost:3000/DetailsProfile');
             }
         });
     }

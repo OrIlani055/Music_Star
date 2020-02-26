@@ -45,7 +45,6 @@ userSchema.statics.CreateUserDetails = async function (body) {
             jobtitle: body.jobtitle,
             music_pref: body.music_pref
     });
-    //console.log(body);
     return await userObj.save();
 }
 
