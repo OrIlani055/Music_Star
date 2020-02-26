@@ -30,6 +30,7 @@ async function checkUser(req, res) {
 }
 
 async function createUserInfo(req, res) {
+    try {
         //console.log(req.body.data);
         let user = await model.find({ "email":req.body.data[0]},
             err => {if (err) throw err;}
@@ -39,7 +40,9 @@ async function createUserInfo(req, res) {
         //console.log(update);
         await model.updateOne(objID, update, err => { if (err) throw err;});
         res.redirect('http://localhost:3000/CardList');
-
+    } catch (err) {
+        console.log(err);  
+    }
 }
 
 
