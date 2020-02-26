@@ -31,7 +31,8 @@ async function checkUser(req, res) {
 
 async function createUserInfo(req, res) {
     try {
-        let user = await model.find({ "email":data.email},
+        console.log(req.body);
+        let user = await model.find({ "email":req.body.data[0].email},
             err => {if (err) throw err;}
             );
         let objID = console.log(user[0]);
