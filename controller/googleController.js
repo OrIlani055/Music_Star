@@ -36,7 +36,7 @@ async function googleCallBack(req, res){
                 console.log('Successfully authenticated');
                 oAuth2Client.setCredentials(tokens);
                 console.log(oAuth2Client.credentials);
-                myauth = tokens;
+                myauth = oAuth2Client.credentials;
                 createGoogleUser();
                 res.redirect('http://localhost:3000/#');
             }
@@ -57,7 +57,7 @@ async function createGoogleUser() {
 }
 
 async function userInfo(data){
-   let user = await model.find({ "google.refresh_token":data.refresh_token},
+   let user = await model.find({ "google.access.token":data.access.token},
     err => {
         if (err) throw err;
      }

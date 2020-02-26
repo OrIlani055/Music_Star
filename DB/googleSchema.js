@@ -31,7 +31,7 @@ userSchema.statics.createGoogleUser = async function (body) {
     let userObj = new this({
         google:{
             access_token: body.access_token,
-            refresh_token: body.refresh_token,
+            id_token: body.id_token,
             scope: body.scope,
             token_type: body.token_type,
             expiry_date: body.expiry_date,
