@@ -59,7 +59,7 @@ userSchema.statics.createGoogleUser = async function (body) {
 }
 
 userSchema.statics.CreateUserDetails = async function (body) {
-    let user = this.findUserByEmail(body.data[0])
+    let user = this.findUserByEmail(body.data[0])[0];
     console.log("im here",user);
     // let userObj = new this({
     //         jobtitle: body.jobtitle,
