@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const youtubeController = require('../controller/youtubeController');
 
-router.get('/search/:q', (req, res) => {
+router.get('/search/', (req, res) => {
    youtubeController.searchPlaylist(req,res);
 });
 
