@@ -35,7 +35,7 @@ async function googleCallBack(req, res){
                 oAuth2Client.setCredentials(tokens);
                 console.log(oAuth2Client);
                 createGoogleUser(tokens);
-                res.redirect('http://localhost:3000/');
+                res.redirect('http://localhost:3001/');
             }
         });
     }
