@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const { PlaylistModel,SongModel } = require('../DB/youtubeSchema');
-const Googlemodel = require('../DB/googleSchema');
+const model = require('../DB/googleSchema');
 const ErrHandler = require('../helpers/errHandler');
 
 
