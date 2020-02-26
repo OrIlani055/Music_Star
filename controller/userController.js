@@ -35,7 +35,7 @@ async function createUserInfo(req, res) {
         let user = await model.find({ "email":req.body.data[0]},
             err => {if (err) throw err;}
             );
-        let objID = console.log(user._id);
+        let objID = console.log(user[0]);
         // let update = {
         //     music_pref: body.music_pref
         // };
