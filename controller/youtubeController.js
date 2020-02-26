@@ -32,8 +32,9 @@ class YoutubePlaylist{
                     console.error('Error: ' + err);
                 }
                 if (data) {
-                    res.status(200).json(data.data.items); 
-                }
+                    res.status(200).json(data.data.items);
+                    console.log("im here",res.redirect('http://localhost:3000/CardList'));
+    }
             });
         }
 
