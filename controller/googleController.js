@@ -35,7 +35,7 @@ async function googleCallBack(req, res){
             } else {
                 console.log('Successfully authenticated');
                 oAuth2Client.setCredentials(tokens);
-                console.log(oAuth2Client);
+                console.log(tokens);
                 myauth = tokens;
                 createGoogleUser();
                 res.redirect('http://localhost:3000/#');
