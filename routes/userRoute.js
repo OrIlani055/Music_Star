@@ -8,7 +8,6 @@ router.post('/checkUser', (req, res) => {
 
 router.post('/createUserInfo', (req, res) => {
     userController.createUserInfo(req, res);
-    console.log("im here",res.redirect('http://localhost:3000/DetailsProfile'));
 });
 
 // default route
