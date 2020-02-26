@@ -22,6 +22,8 @@ async function startauth(req, res) {
     }
 }
 
+let myauth;
+
 async function googleCallBack(req, res){
     const code = req.query.code
     if (code) {
@@ -34,7 +36,8 @@ async function googleCallBack(req, res){
                 console.log('Successfully authenticated');
                 oAuth2Client.setCredentials(tokens);
                 console.log(oAuth2Client);
-                createGoogleUser(oAuth2Client);
+                myauth = tokens;
+                createGoogleUser();
                 res.redirect('http://localhost:3000/#');
             }
         });
@@ -44,7 +47,7 @@ async function googleCallBack(req, res){
 async function createGoogleUser(body) {
     try {
         console.log('issue here')
-        console.log(body.token_type);
+        console.log(myauth.access_token);
         await model.createGoogleUser(body);
         userInfo(body)
 
