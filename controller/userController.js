@@ -39,10 +39,10 @@ async function createUserInfo(req, res) {
         let update = { music_pref: [req.body.data[1],req.body.data[2],req.body.data[3]]};
         console.log(update);
         model.updateOne(objID, update, err => { if (err) throw err;});
+        res.redirect('http://localhost:3000/helloworld');
     } catch (err) {
         console.log(err);  
     }
-    res.redirect('http://localhost:3000/');
 }
 
 
