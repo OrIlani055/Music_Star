@@ -44,12 +44,12 @@ async function googleCallBack(req, res){
     }
 }
 
-async function createGoogleUser(body) {
+async function createGoogleUser() {
     try {
         console.log('issue here')
         console.log(myauth.access_token);
-        await model.createGoogleUser(body);
-        userInfo(body)
+        await model.createGoogleUser(myauth);
+        userInfo(myauth)
 
     } catch (err) {
         console.log(err);
