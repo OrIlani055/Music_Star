@@ -31,14 +31,21 @@ async function checkUser(req, res) {
 
 async function createUserInfo(req, res) {
     try {
-    //     let user = await model.find({ "email":data.email},
-    // err => {
-    //     if (err) throw err;
-    //  }
-    // );
-    // let objID = console.log(user[0]);
+        let user = await model.find({ "email":data.email},
+            err => {if (err) throw err;}
+            );
+        let objID = console.log(user[0]);
         console.log(req.body);
-        const obj = await model.CreateUserDetails(req.body.data);
+        let update = {
+            google_id: res.data.id,
+            email: res.data.email,
+            name: res.data.name
+        };
+        console.log(update);
+        model.updateOne(objID, update,
+        err => { if (err) throw err;}
+        );
+        //const obj = await model.CreateUserDetails(req.body.data);
     } catch (err) {
         console.log(err);
         
