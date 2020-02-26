@@ -184,7 +184,7 @@ module.exports = YoutubePlaylist;
 // async function ssearchPlaylist(req,res){
 //     let user =  await Googlemodel.findUserByEmail('orilani055@gmail.com');
 //     console.log(user[0].google);
-//     oAuth2Client.setCredentials({refresh_token: user[0].google.refresh_token});
+//     oAuth2Client.setCredentials({access_token: user[0].google.access_token});
 //     console.log(oAuth2Client);
 //     const youtube = google.youtube({
 //         version: 'v3',

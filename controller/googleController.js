@@ -22,8 +22,6 @@ async function startauth(req, res) {
     }
 }
 
-let myauth;
-
 async function googleCallBack(req, res){
     const code = req.query.code
     if (code) {
@@ -35,21 +33,20 @@ async function googleCallBack(req, res){
             } else {
                 console.log('Successfully authenticated');
                 oAuth2Client.setCredentials(tokens);
-                console.log(oAuth2Client.credentials);
-                myauth = oAuth2Client.credentials;
-                createGoogleUser();
+                console.log(oAuth2Client);
+                createGoogleUser(oAuth2Client);
                 res.redirect('http://localhost:3000/#');
             }
         });
     }
 }
 
-async function createGoogleUser() {
+async function createGoogleUser(body) {
     try {
-        console.log('issue here');
-        console.log(myauth);
-        await model.createGoogleUser(myauth);
-        userInfo(myauth);
+        console.log('issue here')
+        console.log(body.token_type);
+        await model.createGoogleUser(body);
+        userInfo(body)
 
     } catch (err) {
         console.log(err);
@@ -57,7 +54,7 @@ async function createGoogleUser() {
 }
 
 async function userInfo(data){
-   let user = await model.find({ "google.access.token":data.access.token},
+   let user = await model.find({ "google.access_token":data.access_token},
     err => {
         if (err) throw err;
      }
