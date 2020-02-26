@@ -31,8 +31,14 @@ async function checkUser(req, res) {
 
 async function createUserInfo(req, res) {
     try {
+    //     let user = await model.find({ "email":data.email},
+    // err => {
+    //     if (err) throw err;
+    //  }
+    // );
+    // let objID = console.log(user[0]);
         console.log(req.body);
-        const data = await model.CreateUserDetails(req.body);
+        //const data = await model.CreateUserDetails(req.body);
     } catch (err) {
         console.log(err);
         
