@@ -31,7 +31,7 @@ async function checkUser(req, res) {
 
 async function createUserInfo(req, res) {
     try {
-        console.log(req.body);
+        console.log(req.body.data);
         // let user = await model.find({ "email":req.body.data[0]},
         //     err => {if (err) throw err;}
         //     );
