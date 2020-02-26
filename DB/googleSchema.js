@@ -8,7 +8,7 @@ const userSchema = new Schema({
     music_pref: [String],
     google:{
         access_token: { type: String, required: true, unique: true },
-        refresh_token: { type: String, required: true },
+        id_token: { type: String, required: true },
         scope:{ type: String, required: true },
         token_type: { type: String, required: true },
         expiry_date: {type: Number, required: true}
