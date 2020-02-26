@@ -31,19 +31,18 @@ async function checkUser(req, res) {
 
 async function createUserInfo(req, res) {
     try {
-        console.log(req.body);
-        let user = await model.find({ "email":req.body.data[0]},
-            err => {if (err) throw err;}
-            );
-        //let objID = console.log(user[0]);
-        console.log(req.body);
-        let update = {
-            music_pref: body.music_pref
-        };
-        console.log(update);
-        model.updateOne(objID, update,
-        err => { if (err) throw err;}
-        );
+        console.log(req.body[0]);
+        // let user = await model.find({ "email":req.body.data[0]},
+        //     err => {if (err) throw err;}
+        //     );
+        // //let objID = console.log(user[0]);
+        // let update = {
+        //     music_pref: body.music_pref
+        // };
+        // console.log(update);
+        // model.updateOne(objID, update,
+        // err => { if (err) throw err;}
+        // );
         //const obj = await model.CreateUserDetails(req.body.data);
     } catch (err) {
         console.log(err);
