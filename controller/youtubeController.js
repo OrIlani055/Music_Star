@@ -18,6 +18,7 @@ class YoutubePlaylist{
         let user = await model.find({ "email":"arieell25@gmail.com"},
         err => {if (err) throw err;}
         );
+        
         let pref = user[0].music_pref;
         const randompref = pref[Math.floor(Math.random(0-2) * pref.length)];
         
@@ -35,7 +36,6 @@ class YoutubePlaylist{
                 }
             });
         }
-
 
     static async insertToplaylist(req, res) {
         try {
