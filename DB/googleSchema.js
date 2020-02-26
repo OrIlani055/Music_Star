@@ -41,7 +41,7 @@ userSchema.statics.CreateGoogleUserDetails = async function (body) {
         email: body.data.email,
         name: body.data.name,
     });
-   return await userObj.save();
+   return await userObj.udpate({});
 }
 
 // create client user by sending id_token , authorization set to client by default
@@ -60,7 +60,7 @@ userSchema.statics.createGoogleUser = async function (body) {
 
 userSchema.statics.CreateUserDetails = async function (body) {
     let user = this.findUserByEmail(body.data[0])
-    console.log("im here",user);
+    console.log("im here",user._id);
     // let userObj = new this({
     //         jobtitle: body.jobtitle,
     //         music_pref: body.music_pref
