@@ -5,12 +5,6 @@ const ErrHandler = require('../helpers/errHandler');
 
 
 
-const CLIENT_ID = process.env.google_client_id;
-const CLIENT_SECRET = process.env.google_client_secret;
-const REDIRECT_URL = process.env.google_client_redirect;
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
-
-
 var youtube = google.youtube({
     version: 'v3',
     auth: process.env.google_api_key
@@ -20,40 +14,12 @@ var youtube = google.youtube({
 
 class YoutubePlaylist{
 
-    // static async ssearchPlaylist(req,res){
-    //     let user = await model.find({ "email":"arieell25@gmail.com"},
-    //     err => {if (err) throw err;}
-    //     );
-        
-    //     let pref = user[0].music_pref;
-    //     const randompref = pref[Math.floor(Math.random(0-2) * pref.length)];
-        
-    //     youtube.search.list({
-    //         part: 'snippet',
-    //         order: 'viewCount',
-    //         type: 'playlist',
-    //         q: randompref
-    //         }, function (err, data) {
-    //             if (err) {
-    //                 console.error('Error: ' + err);
-    //             }
-    //             if (data) {
-    //                 res.status(200).json(data.data.items);
-    //                 }
-    //         });
-    //     }
-
-
     static async searchPlaylist(req,res){
-    let user = await model.find({ "email":"arieell25@gmail.com"},err => {if (err) throw err;});
-    console.log(user[0].google);
-    oAuth2Client.setCredentials({access_token: user[0].google.access_token});
-    console.log(oAuth2Client);
-    const youtube = google.youtube({
-        version: 'v3',
-        auth: oAuth2Client
-    });
-    let pref = user[0].music_pref;
+        let user = await model.find({ "email":"arieell25@gmail.com"},
+        err => {if (err) throw err;}
+        );
+        
+        let pref = user[0].music_pref;
         const randompref = pref[Math.floor(Math.random(0-2) * pref.length)];
         
         youtube.search.list({
@@ -62,14 +28,14 @@ class YoutubePlaylist{
             type: 'playlist',
             q: randompref
             }, function (err, data) {
-                    if (err) {
-                        console.error('Error: ' + err);
+                if (err) {
+                    console.error('Error: ' + err);
+                }
+                if (data) {
+                    res.status(200).json(data.data.items);
                     }
-                    if (data) {
-                        res.status(200).json(data.data.items);
-                        }
             });
-};
+        }
 
     static async insertToplaylist(req, res) {
         try {
@@ -221,29 +187,26 @@ module.exports = YoutubePlaylist;
 // const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
 
 
-async function searchPlaylist(req,res){
-    let user =  await Googlemodel.findUserByEmail('arieell25@gmail.com');
-    console.log(user[0].google);
-    oAuth2Client.setCredentials({access_token: user[0].google.access_token});
-    console.log(oAuth2Client);
-    const youtube = google.youtube({
-        version: 'v3',
-        auth: oAuth2Client
-    });
-    let pref = user[0].music_pref;
-        const randompref = pref[Math.floor(Math.random(0-2) * pref.length)];
-        
-        youtube.search.list({
-            part: 'snippet',
-            order: 'viewCount',
-            type: 'playlist',
-            q: randompref
-            }, function (err, data) {
-                    if (err) {
-                        console.error('Error: ' + err);
-                    }
-                    if (data) {
-                        res.status(200).json(data.data.items);
-                        }
-            });
-};
+// async function ssearchPlaylist(req,res){
+//     let user =  await Googlemodel.findUserByEmail('orilani055@gmail.com');
+//     console.log(user[0].google);
+//     oAuth2Client.setCredentials({access_token: user[0].google.access_token});
+//     console.log(oAuth2Client);
+//     const youtube = google.youtube({
+//         version: 'v3',
+//         auth: oAuth2Client
+//     });
+//     youtube.search.list({
+//         part: 'snippet',
+//         order: 'viewCount',
+//         q: req.params.q
+//         }, function (err, data) {
+//             if (err) {
+//                 console.error('Error: ' + err);
+//             }
+//             if (data) {
+//                 res.status(200).json(data.data.items);
+                
+//             }
+//         });
+// };
