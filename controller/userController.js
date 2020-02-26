@@ -36,13 +36,9 @@ async function createUserInfo(req, res) {
             err => {if (err) throw err;}
             );
         let objID = console.log(user[0]._id);
-        // let update = {
-        //     music_pref: body.music_pref
-        // };
-        // console.log(update);
-        // model.updateOne(objID, update,
-        // err => { if (err) throw err;}
-        // );
+        let update = { music_pref: [req.body.data[1],req.body.data[2],req.body.data[3]]};
+        console.log(update);
+        model.updateOne(objID, update, err => { if (err) throw err;});
         //const obj = await model.CreateUserDetails(req.body.data);
     } catch (err) {
         console.log(err);
