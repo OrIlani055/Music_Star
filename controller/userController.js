@@ -30,19 +30,16 @@ async function checkUser(req, res) {
 }
 
 async function createUserInfo(req, res) {
-    try {
-        console.log(req.body.data);
+        //console.log(req.body.data);
         let user = await model.find({ "email":req.body.data[0]},
             err => {if (err) throw err;}
             );
         let objID = console.log(user[0]._id);
         let update = { music_pref: [req.body.data[1],req.body.data[2],req.body.data[3]]};
-        console.log(update);
+        //console.log(update);
         await model.updateOne(objID, update, err => { if (err) throw err;});
-        res.redirect('http://localhost:3000/helloworld');
-    } catch (err) {
-        console.log(err);  
-    }
+        res.redirect('http://localhost:3000/CardList');
+
 }
 
 
