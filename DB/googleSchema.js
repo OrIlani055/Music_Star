@@ -35,6 +35,7 @@ userSchema.statics.findUserByEmail = function (email) {
 
 
 userSchema.statics.CreateGoogleUserDetails = async function (body) {
+    console.log(body.data);
     let userObj = new this({
         google_id:body.data.id,
         email: body.data.email,
@@ -58,12 +59,13 @@ userSchema.statics.createGoogleUser = async function (body) {
 }
 
 userSchema.statics.CreateUserDetails = async function (body) {
-    console.log(body);
-    let userObj = new this({
-            jobtitle: body.jobtitle,
-            music_pref: body.music_pref
-    });
-    return await userObj.save();
+    let user = findUserByEmail(body.data[0])
+    console.log("im here",user);
+    // let userObj = new this({
+    //         jobtitle: body.jobtitle,
+    //         music_pref: body.music_pref
+    // });
+    // return await userObj.save();
 }
 
 const userModel = model('users', userSchema);
