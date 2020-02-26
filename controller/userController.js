@@ -38,7 +38,7 @@ async function createUserInfo(req, res) {
     // );
     // let objID = console.log(user[0]);
         console.log(req.body);
-        //const data = await model.CreateUserDetails(req.body);
+        const obj = await model.CreateUserDetails(req.body.data);
     } catch (err) {
         console.log(err);
         
