@@ -32,10 +32,10 @@ async function checkUser(req, res) {
 async function createUserInfo(req, res) {
     try {
         console.log(req.body);
-        let user = await model.find({ "email":req.body.data[0].email},
+        let user = await model.find({ "email":req.body.data[0]},
             err => {if (err) throw err;}
             );
-        let objID = console.log(user[0]);
+        //let objID = console.log(user[0]);
         console.log(req.body);
         let update = {
             music_pref: body.music_pref
