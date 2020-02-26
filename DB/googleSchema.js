@@ -16,6 +16,24 @@ const userSchema = new Schema({
 }, { collection: "users" });
 
 
+userSchema.statics.findUserByAcceessToken = function (access_token) {
+    return this.find({ access_token: access_token }, function (err) {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
+// read user by id_token that send in the body request and create by google sign in
+userSchema.statics.findUserByEmail = function (email) {
+    return this.find({ email: email }, function (err) {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
+
 userSchema.statics.CreateGoogleUserDetails = async function (body) {
     console.log(body.data);
     let userObj = new this({
@@ -48,24 +66,6 @@ userSchema.statics.CreateUserDetails = async function (body) {
             music_pref: body.music_pref
     });
     return await userObj.save();
-}
-
-
-userSchema.statics.findUserByAcceessToken = function (access_token) {
-    return this.find({ access_token: access_token }, function (err) {
-        if (err) {
-            throw err;
-        }
-    });
-}
-
-// read user by id_token that send in the body request and create by google sign in
-userSchema.statics.findUserByEmail = function (email) {
-    return this.find({ email: email }, function (err) {
-        if (err) {
-            throw err;
-        }
-    });
 }
 
 const userModel = model('users', userSchema);
