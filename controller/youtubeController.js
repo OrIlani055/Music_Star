@@ -20,19 +20,19 @@ class YoutubePlaylist{
         );
         console.log(user[0].music_pref);
        
-        // youtube.search.list({
-        //     part: 'snippet',
-        //     order: 'viewCount',
-        //     type: 'playlist',
-        //     q: req.params.q
-        //     }, function (err, data) {
-        //         if (err) {
-        //             console.error('Error: ' + err);
-        //         }
-        //         if (data) {
-        //             res.status(200).json(data.data.items); 
-        //         }
-        //     });
+        youtube.search.list({
+            part: 'snippet',
+            order: 'viewCount',
+            type: 'playlist',
+            q: user[0].music_pref[0]
+            }, function (err, data) {
+                if (err) {
+                    console.error('Error: ' + err);
+                }
+                if (data) {
+                    res.status(200).json(data.data.items); 
+                }
+            });
         }
 
 
