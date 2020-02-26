@@ -18,13 +18,14 @@ class YoutubePlaylist{
         let user = await model.find({ "email":"arieell25@gmail.com"},
         err => {if (err) throw err;}
         );
-        console.log(user[0].music_pref);
-       
+        let pref = user[0].music_pref;
+        const randompref = pref[Math.floor(Math.random(0-2) * pref.length)];
+        
         youtube.search.list({
             part: 'snippet',
             order: 'viewCount',
             type: 'playlist',
-            q: user[0].music_pref[0]
+            q: randompref
             }, function (err, data) {
                 if (err) {
                     console.error('Error: ' + err);
