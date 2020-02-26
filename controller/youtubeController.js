@@ -15,19 +15,24 @@ var youtube = google.youtube({
 class YoutubePlaylist{
 
     static async searchPlaylist(req,res){
-        youtube.search.list({
-            part: 'snippet',
-            order: 'viewCount',
-            type: 'playlist',
-            q: req.params.q
-            }, function (err, data) {
-                if (err) {
-                    console.error('Error: ' + err);
-                }
-                if (data) {
-                    res.status(200).json(data.data.items); 
-                }
-            });
+        let user = await model.find({ "email":"arieell25@gmail.com"},
+        err => {if (err) throw err;}
+        );
+        console.log(user[0].music_pref);
+       
+        // youtube.search.list({
+        //     part: 'snippet',
+        //     order: 'viewCount',
+        //     type: 'playlist',
+        //     q: req.params.q
+        //     }, function (err, data) {
+        //         if (err) {
+        //             console.error('Error: ' + err);
+        //         }
+        //         if (data) {
+        //             res.status(200).json(data.data.items); 
+        //         }
+        //     });
         }
 
 
