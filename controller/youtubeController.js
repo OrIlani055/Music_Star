@@ -33,7 +33,6 @@ class YoutubePlaylist{
                 }
                 if (data) {
                     res.status(200).json(data.data.items);
-                    console.log("im here",res.redirect('http://localhost:3000/CardList'));
     }
             });
         }
