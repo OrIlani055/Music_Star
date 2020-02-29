@@ -39,7 +39,7 @@ async function createUserInfo(req, res) {
         let updateMusic = { music_pref: [req.body.data[1],req.body.data[2],req.body.data[3]]};
         let updateJob = {jobtitle: req.body.data.jobtitle};
         console.log(updateJob);
-        console.log(update);
+        console.log(updateMusic);
         await model.updateOne(objID, updateMusic, err => { if (err) throw err;});
         await model.updateOne(objID, updateJob, err => { if (err) throw err;});
         //console.log("im here",res.redirect('http://localhost:3000/CardList'));
