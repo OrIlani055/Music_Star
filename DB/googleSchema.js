@@ -32,8 +32,6 @@ userSchema.statics.findOneAndDelete = function (email) {
     });
 }
 
-
-// read user by id_token that send in the body request and create by google sign in
 userSchema.statics.findUserByEmail = function (email) {
     return this.find({ email: email }, function (err) {
         if (err) {
@@ -41,9 +39,6 @@ userSchema.statics.findUserByEmail = function (email) {
         }
     });
 }
-
-
-
 
 userSchema.statics.CreateGoogleUserDetails = async function (body) {
     console.log(body.data);
@@ -55,7 +50,6 @@ userSchema.statics.CreateGoogleUserDetails = async function (body) {
    return await userObj.udpate({});
 }
 
-// create client user by sending id_token , authorization set to client by default
 userSchema.statics.createGoogleUser = async function (body) {
     let userObj = new this({
         google:{
@@ -68,16 +62,6 @@ userSchema.statics.createGoogleUser = async function (body) {
     });
     return await userObj.save();
 }
-
-// userSchema.statics.CreateUserDetails = async function (body) {
-//     let user = this.findUserByEmail(body[0]);
-//     console.log("im here",user[0].google_id);
-//     // let userObj = new this({
-//     //         jobtitle: body.jobtitle,
-//     //         music_pref: body.music_pref
-//     // });
-//     // return await userObj.save();
-// }
 
 const userModel = model('users', userSchema);
 
