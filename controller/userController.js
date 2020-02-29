@@ -48,8 +48,25 @@ async function createUserInfo(req, res) {
     }
 }
 
+async function DeleteUser(req, res) {
+    try {
+        //console.log(req.body.data);
+        let user = await model.find({ "email":req.body.data[0]},
+            err => {if (err) throw err;}
+            );
+        let objID = console.log(user[0]._id);
+        
+        await model.findOneAndDelete(objID);
+
+    } catch (err) {
+        console.log(err);  
+    }
+}
+
+
 
 module.exports = {
     checkUser,
     createUserInfo,
+    DeleteUser
 };

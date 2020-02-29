@@ -6,6 +6,10 @@ router.post('/checkUser', (req, res) => {
     userController.checkUser(req, res);
 });
 
+router.get('/deleteUser', (req, res) => {
+    userController.DeleteUser(req, res);
+});
+
 router.post('/createUserInfo', (req, res) => {
     userController.createUserInfo(req, res);
 });

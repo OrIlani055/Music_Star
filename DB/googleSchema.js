@@ -24,6 +24,15 @@ userSchema.statics.findUserByAcceessToken = function (access_token) {
     });
 }
 
+userSchema.statics.findOneAndDelete = function (email) {
+    return this.find({ email: email }, function (err) {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
+
 // read user by id_token that send in the body request and create by google sign in
 userSchema.statics.findUserByEmail = function (email) {
     return this.find({ email: email }, function (err) {
@@ -32,6 +41,8 @@ userSchema.statics.findUserByEmail = function (email) {
         }
     });
 }
+
+
 
 
 userSchema.statics.CreateGoogleUserDetails = async function (body) {
