@@ -36,13 +36,16 @@ async function createUserInfo(req, res) {
             err => {if (err) throw err;}
             );
         let objID = console.log(user[0]._id);
-        let update = { music_pref: [req.body.data[1],req.body.data[2],req.body.data[3]]};
+        let updateMusic = { music_pref: [req.body.data[1],req.body.data[2],req.body.data[3]]};
+        let updateJob = {jobtitle: req.body.data.jobtitle};
+        console.log(updateJob);
         console.log(update);
-        await model.updateOne(objID, update, err => { if (err) throw err;});
+        //await model.updateOne(objID, updateMusic, err => { if (err) throw err;});
+        await model.updateOne(objID, updateJob, err => { if (err) throw err;});
+        //console.log("im here",res.redirect('http://localhost:3000/CardList'));
     } catch (err) {
         console.log(err);  
     }
-    console.log("im here",res.redirect('http://localhost:3000/DetailsProfile'));
 }
 
 

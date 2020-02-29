@@ -35,7 +35,7 @@ class YoutubePlaylist{
                     res.status(200).json(data.data.items);
                     }
             });
-        }
+    };
 
     static async insertToplaylist(req, res) {
         try {
@@ -66,7 +66,7 @@ class YoutubePlaylist{
         } catch (err) {
             ErrHandler.handle(res, err);
         }
-    }
+    };
 
     static async create(req, res) {
         console.log(req.params.id);
