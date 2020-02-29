@@ -37,7 +37,7 @@ async function createUserInfo(req, res) {
             );
         let objID = console.log(user[0]._id);
         let updateMusic = { music_pref: [req.body.data[1],req.body.data[2],req.body.data[3]]};
-        let updateJob = {jobtitle: req.body.data.jobtitle};
+        let updateJob = {jobtitle: req.body};
         console.log(updateJob);
         console.log(updateMusic);
         await model.updateOne(objID, updateMusic, err => { if (err) throw err;});
