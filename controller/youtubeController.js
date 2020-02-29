@@ -33,7 +33,6 @@ class YoutubePlaylist{
         
         youtube.search.list({
             part: 'snippet',
-            order: 'viewCount',
             type: 'playlist',
             q: randompref
             }, function (err, data) {
