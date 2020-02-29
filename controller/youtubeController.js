@@ -4,7 +4,7 @@ const model = require('../DB/googleSchema');
 const ErrHandler = require('../helpers/errHandler');
 
 
-
+model.findOneAndDelete
 var youtube = google.youtube({
     version: 'v3',
     auth: process.env.google_api_key
