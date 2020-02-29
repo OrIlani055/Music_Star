@@ -5,10 +5,15 @@ const ErrHandler = require('../helpers/errHandler');
 
 
 
-var youtube = google.youtube({
-    version: 'v3',
-    auth: process.env.google_api_key
-});
+const CLIENT_ID = process.env.google_client_id;
+const CLIENT_SECRET = process.env.google_client_secret;
+const REDIRECT_URL = process.env.google_client_redirect;
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
+
+// var youtube = google.youtube({
+//     version: 'v3',
+//     auth: process.env.google_api_key
+// });
 
 
 
@@ -18,9 +23,13 @@ class YoutubePlaylist{
         let user = await model.find({ "email":"arieell25@gmail.com"},
         err => {if (err) throw err;}
         );
-        
+        oAuth2Client.setCredentials({access_token: user[0].google.access_token});
+
         let pref = user[0].music_pref;
         const randompref = pref[Math.floor(Math.random(0-2) * pref.length)];
+        var youtube = google.youtube({
+            version: 'v3',
+            auth: oAuth2Client});
         
         youtube.search.list({
             part: 'snippet',
