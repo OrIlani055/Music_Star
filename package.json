@@ -19,7 +19,7 @@
   "homepage": "https://github.com/OrIlani055/Music_Star#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "google-auth-library": "^5.9.2",
     "googleapis": "^39.2.0",
     "mongoose": "^5.8.11",
